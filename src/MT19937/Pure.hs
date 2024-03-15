@@ -55,18 +55,18 @@ initHelper mt' = \case
     f = 1812433253 -- 0x6c078965
     w = 32
 
--- | Extract the next random byte and return the updated state.
+-- | Extract the next random word and return the updated state.
 extract :: MT19937 -> (Word32, MT19937)
 extract (MT19937 idx mt) = do
     if idx == 624 then -- could do a >= check here if we're paranoid
         let mt' = VU.modify twist mt
-            w   = temper (mt VU.! 0)
+            w   = temper (mt' VU.! 0)
         in  (w, MT19937 1       mt')
     else
         let w   = temper (mt VU.! idx)
         in  (w, MT19937 (idx+1) mt)
 
--- | Skip the given number of random bytes.
+-- | Skip the given number of random words.
 --
 -- If the skips would result in multiple twists, we perform these in a single
 -- pass (rather than copying the array every twist).
