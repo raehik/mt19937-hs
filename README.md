@@ -1,5 +1,6 @@
-# `mt19937`: MT19937 implementation in pure Haskell
-What it says on the box.
+# mt19937
+Efficient MT19937 (standard 32-bit Mersenne Twister PRNG) implementation, in pure Haskell
+(no FFI) with a pure interface.
 
 Only the PRNG itself is implemented. If you'd like to use this as a PRNG in any
 capacity, you'll need to wrap it into some monad or some such.
