@@ -22,20 +22,19 @@ temper x = z
 
 -- | Twist an MT19937 state vector.
 twist :: VUM.PrimMonad m => VUM.MVector (VUM.PrimState m) Word32 -> m ()
-twist mt = go (0 :: Word32)
+twist mt = go 0
   where
-    fI = fromIntegral
     m = 397
     a = 0x9908B0DF
     go = \case
       624 -> pure ()
       i   -> do
-        mti  <- VUM.unsafeRead mt (fI i)
-        mti1 <- VUM.unsafeRead mt (fI ((i+1) `mod` 624))
-        mtim <- VUM.unsafeRead mt (fI ((i+m) `mod` 624))
+        mti  <- VUM.unsafeRead mt i
+        mti1 <- VUM.unsafeRead mt ((i+1) `mod` 624)
+        mtim <- VUM.unsafeRead mt ((i+m) `mod` 624)
         let x    = (mti .&. 0x80000000) + (mti1 .&. 0x7FFFFFFF)
             mti' = mtim `xor` (x `shiftR` 1)
         if   x .&. 1 == 0
-        then VUM.unsafeWrite mt (fI i) mti'
-        else VUM.unsafeWrite mt (fI i) (mti' `xor` a)
+        then VUM.unsafeWrite mt i mti'
+        else VUM.unsafeWrite mt i (mti' `xor` a)
         go (i+1)
