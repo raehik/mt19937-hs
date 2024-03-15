@@ -1,18 +1,23 @@
 name: mt19937
-version: 0.1.0
+version: 0.1.1
 synopsis: Standard 32-bit Mersenne Twister PRNG, in pure Haskell
 description: Please see README.md.
 extra-source-files:
 - README.md
 - CHANGELOG.md
 category: Data, Random, Cryptography
-tested-with: GHC ==9.8.1, GHC==9.6.4, GHC==9.4.8, GHC==9.2.8
 license: MIT
 license-file: LICENSE
 
 github: raehik/mt19937-hs
 maintainer: Ben Orchard <thefirstmuffinman@gmail.com>
 author: Ben Orchard
+
+tested-with:
+- GHC == 9.8.1
+- GHC == 9.6.4
+- GHC == 9.4.8
+- GHC == 9.2.8
 
 # raehik's extensions (GHC 9.2; last updated: 2022-10-09)
 language: GHC2021
