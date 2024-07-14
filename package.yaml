@@ -57,7 +57,7 @@ ghc-options:
 - -Wall
 
 dependencies:
-- base >= 4.16.3.0 && < 4.20 # blaze it
+- base >= 4.16.3.0 && < 4.21
 - vector >= 0.13.1.0 && < 0.14
 
 library:

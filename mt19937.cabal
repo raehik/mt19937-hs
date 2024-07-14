@@ -50,6 +50,6 @@ library
       MagicHash
   ghc-options: -Wall
   build-depends:
-      base >=4.16.3.0 && <4.20
+      base >=4.16.3.0 && <4.21
     , vector >=0.13.1.0 && <0.14
   default-language: GHC2021
