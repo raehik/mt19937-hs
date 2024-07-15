@@ -21,8 +21,22 @@
       systems = inputs.nixpkgs.lib.systems.flakeExposed;
       imports = [ inputs.haskell-flake.flakeModule ];
       perSystem = { self', pkgs, config, ... }: {
-        packages.default  = self'.packages.ghc96-mt19937;
-        devShells.default = self'.devShells.ghc96;
+        packages.default  = self'.packages.ghc910-mt19937;
+        devShells.default = self'.devShells.ghc910;
+        haskellProjects.ghc910-base = import ./flake-ghc910.nix pkgs;
+        haskellProjects.ghc910 = {
+          basePackages = config.haskellProjects.ghc910-base.outputs.finalPackages;
+          devShell = {
+            hoogle = false;
+            tools = _: {
+              # best disable them for new GHC 9.10
+              hlint = null;
+              haskell-language-server = null;
+              ghcid = null;
+            };
+            mkShellArgs.name = "ghc910-mt19937";
+          };
+        };
         haskellProjects.ghc98 = {
           # shouldn't work, pkgs aren't up to date and mine aren't 9.8 ready
           basePackages = pkgs.haskell.packages.ghc98;
